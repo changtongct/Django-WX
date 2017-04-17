@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+	body { background-color:#d0ffff;}
+	table {	border-collapse:collapse;
+		width:100%;
+		background-color:#f0ffff;}
+	#div0 {	padding:25px}
+	#div1 { margin-top:5px;
+		padding:25px;}
+	#div2 { margin-top:5px;
+		padding:5px;
+		background:#ffffff;}
+</style>
+<!--
+<meta http-equiv="refresh" content="60">
+-->
+	<title>QA显示</title>
+</head>
+<body>
+<div id="div0">
+	<div id="div2">
+		<form name='form2' method="post">
+		{{QAform}}
+		<input type="submit" name="addQA" value="提交">
+		</form>
+	</div>
+	<div id="div2" style="width:88.5%;float:left;">
+		<form name="form3" method="post">
+		{{QAdelete}}
+		<input type="submit" name="deleteQA" value="删除">
+		</form>
+	</div>
+	<div id="div2" style="width:9%;float:right;">
+		<form method="post">
+		<input type="submit" name="questTimesRe" value="计数重置">
+		</form>
+	</div>
+</div>
+<div id="div1">
+<script type="text/javascript">
+	var Dict = {{qas|safe}};
+	var htmlstr = "<table border='2'>";
+	
+	htmlstr += "<tr>";
+	htmlstr += "<th width='6%'>id</th>";
+	htmlstr += "<th width='32%'>问题</th>";
+	htmlstr += "<th width='32%'>回答</th>";
+	htmlstr += "<th width='20%'>时间</th>";
+	htmlstr += "<th width='10%'>请求次数</th>";
+	htmlstr += "</tr>";
+	for(var i=0; i<Dict.length; i++)
+	{
+		htmlstr += "<tr>";
+		htmlstr += "<td width='6%' align='center'>"+Dict[i]['pk']+"</td>";
+		htmlstr += "<td width='32%'>"+Dict[i]['fields']['questions']+"</td>";
+		htmlstr += "<td width='32%'>"+Dict[i]['fields']['answers']+"</td>";
+		htmlstr += "<td width='20%' align='center'>"+Dict[i]['fields']['datetime']+"</td>";
+		htmlstr += "<td width='10%'>"+Dict[i]['fields']['questTimes']+"</td>";
+		htmlstr += "</tr>";
+	}
+	htmlstr += "</table>";
+
+	document.write(htmlstr);
+</script>
+</div>
+</body>
+</html>
